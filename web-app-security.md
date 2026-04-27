@@ -202,3 +202,91 @@ Key Concepts Learned
 -- UNION-based SQL Injection  
 -- Database enumeration  
 -- Data extraction techniques  
+
+# Day 27 - Cross-Site Scripting (XSS - Stored & Reflected)
+
+-- Performed Stored and Reflected Cross-Site Scripting attacks and analyzed their impact  
+
+Objective
+
+-- Understand XSS vulnerabilities  
+-- Perform Stored and Reflected XSS attacks  
+-- Analyze impact of client-side code injection  
+-- Implement mitigation techniques  
+
+Tools Used
+
+-- Kali Linux  
+-- DVWA (Damn Vulnerable Web App)  
+-- Web Browser  
+
+Setup
+
+-- DVWA Security Level set to LOW  
+
+What is XSS?
+
+-- Cross-Site Scripting allows attackers to inject malicious scripts into web pages  
+-- Executes in victim’s browser  
+
+Part 1 – Stored XSS
+
+Step 1:
+-- Go to:
+   XSS (Stored) module  
+
+Step 2:
+-- Input payload:
+
+   <script>alert('Stored XSS')</script>
+
+Step 3:
+-- Submit form  
+
+Result:
+-- Script executes whenever page loads  
+
+Part 2 – Reflected XSS
+
+Step 1:
+-- Go to:
+   XSS (Reflected) module  
+
+Step 2:
+-- Input:
+
+   <script>alert('Reflected XSS')</script>
+
+Result:
+-- Script executes immediately in response  
+
+Explanation
+
+-- Stored XSS:
+   -- Payload saved in server/database  
+
+-- Reflected XSS:
+   -- Payload reflected in response  
+
+Security Impact
+
+-- Session hijacking  
+-- Cookie theft  
+-- Phishing attacks  
+-- Defacement  
+
+Mitigation Techniques
+
+-- Input Validation  
+-- Output Encoding  
+-- Content Security Policy (CSP)  
+
+Example CSP:
+   Content-Security-Policy: default-src 'self'; script-src 'self'
+
+Key Concepts Learned
+
+-- Client-side code execution risk  
+-- Persistent vs non-persistent XSS  
+-- Importance of sanitizing user input  
+
