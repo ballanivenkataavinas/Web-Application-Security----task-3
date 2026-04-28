@@ -290,3 +290,89 @@ Key Concepts Learned
 -- Persistent vs non-persistent XSS  
 -- Importance of sanitizing user input  
 
+# Day 28 - Cross-Site Request Forgery (CSRF)
+
+-- Performed CSRF attack to change user password without authorization and analyzed prevention mechanisms  
+
+Objective
+
+-- Understand CSRF vulnerability  
+-- Perform CSRF attack on DVWA  
+-- Change user password without user consent  
+-- Learn prevention using CSRF tokens  
+
+Tools Used
+
+-- Kali Linux  
+-- DVWA (Damn Vulnerable Web App)  
+-- Browser  
+
+Setup
+
+-- DVWA Security Level set to LOW  
+
+What is CSRF?
+
+-- CSRF tricks a user into performing unwanted actions on a web application where they are already authenticated  
+
+Step 1 – Navigate to CSRF Module
+
+-- Open:
+   CSRF (Change Password)  
+
+Step 2 – Observe Normal Request
+
+-- Change password normally  
+
+-- Example:
+   new password: test123  
+
+Step 3 – Capture Request URL
+
+-- URL looks like:
+
+   http://localhost/dvwa/vulnerabilities/csrf/?password_new=test123&password_conf=test123&Change=Change  
+
+Step 4 – Create Malicious Link
+
+-- Copy URL and modify password:
+
+   http://localhost/dvwa/vulnerabilities/csrf/?password_new=hacked&password_conf=hacked&Change=Change  
+
+Step 5 – Execute Attack
+
+-- Open link in browser  
+
+Result:
+-- Password gets changed without authentication prompt  
+
+Explanation
+
+-- Browser automatically sends session cookies  
+-- Server trusts request → executes action  
+
+Security Impact
+
+-- Unauthorized actions  
+-- Account takeover  
+-- Data manipulation  
+
+Prevention Techniques
+
+-- Use CSRF Tokens  
+-- Validate origin/referrer  
+-- SameSite Cookies  
+
+DVWA Protection Demo
+
+-- Set security level to MEDIUM or HIGH  
+
+-- Observe:
+   -- Token added to request  
+   -- Attack fails without valid token  
+
+Key Concepts Learned
+
+-- CSRF exploits authenticated sessions  
+-- Lack of request validation leads to vulnerability   
+
