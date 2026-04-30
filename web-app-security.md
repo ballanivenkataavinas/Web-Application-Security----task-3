@@ -455,3 +455,160 @@ Key Concepts Learned
 -- Path traversal attacks  
 -- Difference between LFI and RFI  
 -- Risk of insecure file handling  
+
+# Day 30 - Burp Suite (Deep Practical Usage: Interception, Modification, Intruder)
+
+-- Performed in-depth testing using Burp Suite by intercepting HTTP traffic, modifying requests, and conducting controlled fuzzing using Intruder
+ Objective
+-- Understand HTTP request-response flow in real scenarios
+-- Intercept and analyze raw HTTP requests
+-- Modify parameters to test vulnerabilities
+-- Perform controlled fuzzing to identify weak inputs
+-- Analyze responses for security issues
+
+Tools Used
+-- Kali Linux
+-- Burp Suite
+-- DVWA
+-- Web Browser
+
+Step 1 – Understanding Proxy Behavior
+-- Burp Suite works as a proxy between browser and server
+Flow:
+Browser → Burp → Server → Burp → Browser
+
+-- All HTTP requests pass through Burp
+-- Allows inspection and modification before reaching server
+
+Step 2 – Configure Proxy
+
+-- Set browser proxy:
+
+IP: 127.0.0.1
+Port: 8080
+
+-- This ensures all traffic is routed through Burp
+
+Step 3 – Intercepting HTTP Request
+
+-- Enable:
+Proxy → Intercept → ON
+
+-- Perform login in DVWA
+
+Captured request:
+
+POST /dvwa/login.php HTTP/1.1
+Host: localhost
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=password&Login=Login
+
+Analysis of Request
+
+-- Request contains:
+-- Method (POST)
+-- URL endpoint
+-- Headers
+-- Body parameters
+
+-- Sensitive data like credentials can be visible if not encrypted
+
+Step 4 – Modifying Requests
+
+-- Modify request before forwarding
+
+Example:
+
+username=admin&password=wrong
+
+Change to:
+
+username=admin&password=admin
+
+-- Or test injection:
+
+username=admin' OR '1'='1&password=test
+
+-- Forward request to server
+
+-- Observe response behavior
+
+Step 5 – Parameter Tampering
+
+-- Modify hidden or visible parameters
+
+Example:
+
+role=user → role=admin
+
+-- Used to test:
+-- Authorization flaws
+-- Access control issues
+
+Step 6 – Sending Request to Intruder
+
+-- Right click request → Send to Intruder
+
+-- Used for automated testing
+
+Step 7 – Intruder Configuration
+
+-- Go to:
+Intruder → Positions
+
+-- Select parameter (e.g., password)
+
+Example:
+
+password=§test§
+
+-- Choose attack type:
+-- Sniper (single parameter testing)
+
+Step 8 – Payload Setup
+
+-- Load payload list (common passwords)
+
+Example:
+admin
+123456
+password
+test123
+
+Step 9 – Launch Attack
+
+-- Start Intruder attack
+
+-- Observe results table
+
+Step 10 – Analyze Results
+
+-- Focus on:
+-- Response length
+-- Status code
+-- Response content
+
+-- Different response length indicates possible valid credential
+
+Key Technical Concepts
+
+-- HTTP request structure
+-- Client-server communication
+-- Parameter manipulation
+-- Automated fuzzing
+
+Security Impact
+
+-- Credential brute force
+-- Authentication bypass
+-- Parameter tampering
+-- Session manipulation
+
+Mitigation Techniques
+
+-- Implement strong authentication
+-- Apply rate limiting
+-- Use account lockout policies
+-- Validate and sanitize inputs
+-- Use HTTPS to protect data in transit
