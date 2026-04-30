@@ -376,7 +376,7 @@ Key Concepts Learned
 -- CSRF exploits authenticated sessions  
 -- Lack of request validation leads to vulnerability   
 
-Day 29 - File Inclusion Attacks (LFI & RFI)
+# Day 29 - File Inclusion Attacks (LFI & RFI)
 
 -- Performed Local File Inclusion (LFI) and Remote File Inclusion (RFI) attacks to access sensitive files and execute external code  
 
@@ -456,7 +456,7 @@ Key Concepts Learned
 -- Difference between LFI and RFI  
 -- Risk of insecure file handling  
 
-# Day 30 - Burp Suite (Deep Practical Usage: Interception, Modification, Intruder)
+# Day 30 - Burp Suite(Interception, Modification, Intruder)
 
 -- Performed in-depth testing using Burp Suite by intercepting HTTP traffic, modifying requests, and conducting controlled fuzzing using Intruder
  Objective
