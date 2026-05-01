@@ -696,8 +696,6 @@ X-XSS-Protection: 1; mode=block
 
 -- Enables browser XSS filtering  
 
----
-
 4. Strict-Transport-Security (HSTS)
 
 Strict-Transport-Security: max-age=31536000; includeSubDomains
@@ -705,7 +703,6 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 -- Forces HTTPS usage  
 -- Prevents downgrade attacks  
 
----
 
 5. X-Content-Type-Options
 
