@@ -612,3 +612,147 @@ Mitigation Techniques
 -- Use account lockout policies
 -- Validate and sanitize inputs
 -- Use HTTPS to protect data in transit
+
+
+Day 31 - Web Security Headers & Hardening
+
+-- Analyzed HTTP security headers and implemented defensive mechanisms to secure web applications against common attacks  
+
+Objective
+
+-- Understand HTTP security headers  
+-- Analyze existing headers in web applications  
+-- Identify missing or weak configurations  
+-- Implement proper security headers  
+-- Learn how headers mitigate attacks  
+
+Tools Used
+
+-- Kali Linux  
+-- Web Browser  
+-- Developer Tools (Inspect → Network tab)  
+-- securityheaders.com  
+
+Step 1 – Analyze Existing Headers
+
+-- Open DVWA or any test web application  
+
+-- Open Developer Tools:
+   -- Right click → Inspect  
+   -- Go to Network tab  
+   -- Reload the page  
+
+-- Click any request → View Response Headers  
+
+Example Response Headers
+
+HTTP/1.1 200 OK  
+Server: Apache/2.4.41  
+Content-Type: text/html  
+
+Observation
+
+-- Missing important security headers:
+   -- Content-Security-Policy  
+   -- X-Frame-Options  
+   -- X-XSS-Protection  
+   -- Strict-Transport-Security  
+
+-- Indicates weak security configuration  
+
+Step 2 – External Analysis
+
+-- Open:
+   https://securityheaders.com  
+
+-- Enter target website URL  
+
+-- Analyze results  
+
+Result
+
+-- Website receives grade (A to F)  
+-- Shows missing and misconfigured headers  
+
+Step 3 – Important Security Headers
+
+1. Content Security Policy (CSP)
+
+Content-Security-Policy: default-src 'self';
+
+-- Restricts loading of scripts and resources  
+-- Prevents Cross-Site Scripting (XSS)  
+
+2. X-Frame-Options
+
+X-Frame-Options: DENY
+
+-- Prevents embedding in iframes  
+-- Protects against clickjacking  
+
+3. X-XSS-Protection
+
+X-XSS-Protection: 1; mode=block
+
+-- Enables browser XSS filtering  
+
+---
+
+4. Strict-Transport-Security (HSTS)
+
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+-- Forces HTTPS usage  
+-- Prevents downgrade attacks  
+
+---
+
+5. X-Content-Type-Options
+
+X-Content-Type-Options: nosniff
+
+-- Prevents MIME type sniffing  
+
+Step 4 – Implement Headers in Apache
+
+-- Open configuration file:
+
+sudo nano /etc/apache2/conf-available/security.conf  
+
+-- Add:
+
+Header set Content-Security-Policy "default-src 'self';"  
+Header set X-Frame-Options "DENY"  
+Header set X-XSS-Protection "1; mode=block"  
+Header set X-Content-Type-Options "nosniff"  
+
+Step 5 – Restart Apache
+
+sudo service apache2 restart  
+
+Step 6 – Verify Headers
+
+-- Reload application  
+-- Check Developer Tools → Response Headers  
+
+-- Confirm headers are present  
+
+Security Impact
+
+-- Without headers:
+   -- XSS attacks possible  
+   -- Clickjacking risk  
+   -- Data injection vulnerabilities  
+
+Mitigation Summary
+
+-- Use CSP to restrict scripts  
+-- Prevent iframe embedding  
+-- Enforce HTTPS  
+-- Disable content sniffing  
+
+Key Concepts Learned
+
+-- HTTP headers act as first layer of defense  
+-- Security misconfiguration leads to vulnerabilities  
+-- Proper headers significantly improve application security  
