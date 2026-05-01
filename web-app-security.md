@@ -614,7 +614,7 @@ Mitigation Techniques
 -- Use HTTPS to protect data in transit
 
 
-Day 31 - Web Security Headers & Hardening
+# Day 31 - Web Security Headers & Hardening
 
 -- Analyzed HTTP security headers and implemented defensive mechanisms to secure web applications against common attacks  
 
