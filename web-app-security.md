@@ -753,3 +753,159 @@ Key Concepts Learned
 -- HTTP headers act as first layer of defense  
 -- Security misconfiguration leads to vulnerabilities  
 -- Proper headers significantly improve application security  
+
+
+# Day 31 & 32 - Web Security Headers & Final Security Testing
+
+-- Implemented HTTP security headers, performed full vulnerability testing, and prepared final security analysis report  
+
+Objective
+
+-- Analyze and implement web security headers  
+-- Perform end-to-end testing of vulnerabilities (SQLi, XSS, CSRF)  
+-- Validate mitigation techniques  
+-- Prepare final security testing report  
+
+Tools Used
+
+-- Kali Linux  
+-- DVWA (Damn Vulnerable Web App)  
+-- Burp Suite  
+-- Web Browser  
+-- securityheaders.com  
+
+Part 1 – Web Security Headers Analysis
+
+Step 1 – Inspect Existing Headers
+
+-- Open DVWA  
+
+-- Use Developer Tools:
+   -- Inspect → Network → Reload  
+
+-- Check Response Headers  
+
+Observed Headers
+
+HTTP/1.1 200 OK  
+Server: Apache  
+Content-Type: text/html  
+
+Observation
+
+-- Missing security headers:
+   -- Content-Security-Policy  
+   -- X-Frame-Options  
+   -- X-XSS-Protection  
+   -- Strict-Transport-Security  
+
+Step 2 – External Scan
+
+-- Open:
+   https://securityheaders.com  
+
+-- Analyze target  
+
+Result
+
+-- Low security rating due to missing headers  
+
+Step 3 – Implement Security Headers
+
+-- Open config file:
+
+sudo nano /etc/apache2/conf-available/security.conf  
+
+-- Add:
+
+Header set Content-Security-Policy "default-src 'self';"  
+Header set X-Frame-Options "DENY"  
+Header set X-XSS-Protection "1; mode=block"  
+Header set X-Content-Type-Options "nosniff"  
+
+Restart Server
+
+sudo service apache2 restart  
+
+Verification
+
+-- Reload site  
+-- Confirm headers in response  
+
+Impact
+
+-- Prevents XSS  
+-- Prevents Clickjacking  
+-- Improves browser-level security  
+
+Part 2 – Final Vulnerability Testing
+
+SQL Injection Testing
+
+-- Tested login bypass  
+
+Payload:
+' OR '1'='1  
+
+-- Result:
+-- Authentication bypass successful  
+
+XSS Testing
+
+-- Tested Stored XSS  
+
+Payload:
+<script>alert('XSS')</script>  
+
+-- Result:
+-- Script executed in browser  
+
+CSRF Testing
+
+-- Crafted malicious request  
+
+-- Result:
+-- Password changed without user consent  
+
+File Inclusion Testing
+
+-- Performed LFI  
+
+Payload:
+../../../../etc/passwd  
+
+-- Result:
+-- Sensitive system file exposed  
+
+Burp Suite Testing
+
+-- Intercepted HTTP requests  
+-- Modified parameters  
+-- Performed fuzzing using Intruder  
+
+Security Findings
+
+-- Input validation missing  
+-- Authentication bypass possible  
+-- Sensitive data exposure  
+-- Weak security configuration  
+
+Mitigation Summary
+
+-- Use prepared statements (SQLi)  
+-- Apply input validation and encoding (XSS)  
+-- Implement CSRF tokens  
+-- Restrict file access (LFI/RFI)  
+-- Add security headers  
+
+Final Outcome
+
+-- Successfully identified and exploited multiple vulnerabilities  
+-- Implemented defensive mechanisms  
+-- Verified security improvements  
+
+Key Concepts Learned
+
+-- End-to-end web application testing  
+-- Attack and defense methodology  
+-- Importance of secure configuration  
