@@ -909,3 +909,125 @@ Key Concepts Learned
 -- End-to-end web application testing  
 -- Attack and defense methodology  
 -- Importance of secure configuration  
+
+Day 33 & 34 - Security Testing Report & Video Preparation
+
+-- Compiled detailed security testing report and prepared final demo showcasing exploitation and mitigation techniques  
+
+Objective
+
+-- Document all identified vulnerabilities  
+-- Provide clear attack and mitigation explanations  
+-- Organize screenshots and evidence  
+-- Prepare structured demo video (8 minutes)  
+
+Tools Used
+
+-- Kali Linux  
+-- DVWA (Damn Vulnerable Web App)  
+-- Burp Suite  
+-- Web Browser  
+-- Screen Recorder  
+
+Part 1 – Security Testing Report
+
+Vulnerabilities Documented
+
+1. SQL Injection (SQLi)
+
+-- Attack:
+   -- Input: ' OR '1'='1  
+
+-- Result:
+   -- Authentication bypass  
+
+-- Impact:
+   -- Unauthorized access  
+   -- Database exposure  
+
+-- Mitigation:
+   -- Prepared Statements  
+   -- Parameterized queries  
+
+2. Cross-Site Scripting (XSS)
+
+-- Attack:
+   -- <script>alert('XSS')</script>  
+
+-- Result:
+   -- Script execution in browser  
+
+-- Impact:
+   -- Session hijacking  
+   -- Data theft  
+
+-- Mitigation:
+   -- Input sanitization  
+   -- Output encoding  
+   -- Content Security Policy  
+
+3. Cross-Site Request Forgery (CSRF)
+
+-- Attack:
+   -- Malicious URL to change password  
+
+-- Result:
+   -- Password changed without user consent  
+
+-- Impact:
+   -- Account takeover  
+
+-- Mitigation:
+   -- CSRF tokens  
+   -- SameSite cookies  
+
+File Inclusion (LFI)
+
+-- Attack:
+   -- ../../../../etc/passwd  
+
+-- Result:
+   -- Sensitive file access  
+
+-- Impact:
+   -- Information disclosure  
+
+-- Mitigation:
+   -- Input validation  
+   -- Restrict file access  
+
+Burp Suite Testing
+
+-- Intercepted requests  
+-- Modified parameters  
+-- Performed fuzzing  
+
+-- Impact:
+   -- Credential brute force  
+   -- Parameter tampering  
+
+Part 3 – Evidence Collection
+
+-- Screenshots organized into:
+
+-- screenshots/
+   -- sqli/  
+   -- xss/  
+   -- csrf/  
+   -- file-inclusion/  
+   -- burp/  
+
+Part 4 – Video Preparation
+
+Video Goal
+
+-- Demonstrate:
+   -- One vulnerability exploit  
+   -- Its impact  
+   -- Its mitigation  
+
+Key Concepts Learned
+
+-- Documentation is critical in cybersecurity  
+-- Clear reporting improves understanding  
+-- Demonstrating both attack and defense is essential   
