@@ -910,7 +910,7 @@ Key Concepts Learned
 -- Attack and defense methodology  
 -- Importance of secure configuration  
 
-Day 33 & 34 - Security Testing Report & Video Preparation
+# Day 33 & 34 - Security Testing Report 
 
 -- Compiled detailed security testing report and prepared final demo showcasing exploitation and mitigation techniques  
 
